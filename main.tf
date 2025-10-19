@@ -1,12 +1,7 @@
-resource "aws_key_pair" "imported_key" {
-  key_name = "app_server_key"
-  public_key = file("app_server_key.pub")
-}
-
 resource "aws_instance" "app-server" {
   ami = var.amiID
   instance_type = var.instance_type
-  key_name = aws_key_pair.imported_key.key_name
+  key_name = "master-server"
   vpc_security_group_ids = [aws_security_group.app_server_sg.id]
   associate_public_ip_address = true
   
